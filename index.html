@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" onkeydown="jump()">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootleg Dino Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="character"></div>
+    <div id="obstacle"></div>
+    <div id="score">Score: 0</div>
+
+    <script>
+        let obstacleLeft = 1000;
+        let obstacle = document.getElementById("obstacle")
+        let scoreElement = document.getElementById("score")
+        let score = 0;
+
+        setInterval(() => {
+            obstacle.style.left = obstacleLeft  + "px";
+            obstacleLeft -= 20;
+
+            if (!characterTop && obstacleLeft < 50){
+                alert("Game over\nScore: " + score);
+                clearInterval();
+                location.reload();
+            }
+            if (obstacleLeft < 1){
+                obstacleLeft = 1000;
+                score++;
+                scoreElement.innerText = "Score: " + score;
+            }
+        }, 10)
+
+        let character = document.getElementById("character")
+        let characterTop = false;
+        function jump(){
+            character.style.top = "300px";
+            characterTop = true;
+            setTimeout(() => {
+                character.style.top = "500px";
+                characterTop = false
+            }, 400)
+        }
+    </script>
+</body>
+</html>

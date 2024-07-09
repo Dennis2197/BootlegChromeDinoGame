@@ -1,0 +1,22 @@
+#character{
+    background-color: blue;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 500px;
+}
+#obstacle{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    left: 800px;
+    top: 500px;
+    position: absolute;
+}
+#score {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
