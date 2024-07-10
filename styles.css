@@ -1,17 +1,21 @@
 #character{
-    background-color: blue;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
     position: absolute;
     top: 500px;
+    background-image: url("assets/pepedance.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 #obstacle{
-    background-color: red;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     left: 800px;
     top: 500px;
     position: absolute;
+    background-image: url("assets/peperun.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 #score {
     position: absolute;
@@ -19,4 +23,16 @@
     left: 20px;
     font-size: 24px;
     font-family: Arial, sans-serif;
+}
+#start {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        transition: top 2s;
+        width: 260px;
+        height: 90px;
+        font-family: Arial, sans-serif;
+        font-size: 50px;
+        background: deepskyblue;
 }
