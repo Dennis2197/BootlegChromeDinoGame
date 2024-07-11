@@ -3,7 +3,7 @@
     width: 200px;
     position: absolute;
     top: 500px;
-    background-image: url("assets/pepedance.gif");
+    background-image: url("assets/img/pepedance.gif");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -13,7 +13,7 @@
     left: 800px;
     top: 500px;
     position: absolute;
-    background-image: url("assets/peperun.gif");
+    background-image: url("assets/img/peperun.gif");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -25,14 +25,102 @@
     font-family: Arial, sans-serif;
 }
 #start {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        transition: top 2s;
-        width: 260px;
-        height: 90px;
-        font-family: Arial, sans-serif;
-        font-size: 50px;
-        background: deepskyblue;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transition: top 2s;
+    width: 260px;
+    height: 90px;
+    font-family: Arial, sans-serif;
+    font-size: 50px;
+    background: linear-gradient(red, orange);
+    border-radius: 50px;
+    box-shadow: black;
+    border: black;
+    text-shadow: black;
+}
+#score {
+    font-family: Arial, sans-serif;
+    color: black;
+}
+#blackTheme {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 32%;
+    left: 30%;
+    transition: top 2s;
+    width: 140px;
+    height: 60px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    background: linear-gradient(black, lightblue);
+    box-shadow: black;
+    border: black;
+    text-shadow: black;
+    border-radius: 50px;
+}
+#lightTheme {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 32%;
+    left: 50%;
+    transition: top 2s;
+    width: 140px;
+    height: 60px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    background: lightblue;
+    border-radius: 50px;
+    box-shadow: black;
+    border: black;
+    text-shadow: black;
+}
+#pondTheme {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 32%;
+    left: 70%;
+    transition: top 2s;
+    width: 140px;
+    height: 60px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    background: linear-gradient(lime, green);
+    border-radius: 50px;
+    box-shadow: black;
+    border: black;
+    text-shadow: black;
+}
+#soundIcon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 3%;
+    left: 97%;
+    width: 40px;
+}
+#gameOverImg {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: -1000px;
+    left: 50%;
+    transition: top 2s;
+    width: 360px;
+}
+#restartButton {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: -1000px;
+    left: 50%;
+    transition: top 2s;
+    width: 140px;
+    height: 60px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    background: darkslategrey;
+    color: white;
+    border-radius: 50px;
+    box-shadow: black;
+    border: black;
+    text-shadow: black;
 }

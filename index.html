@@ -2,38 +2,122 @@
 <html lang="en" onkeydown="jump()">
 <head>
     <meta charset="UTF-8">
-    <title>Bootleg Dino Game</title>
+    <title>Pepe Run</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="body">
+
+<audio id="menuTheme" src="assets/audio/menu.mp3"></audio>
+<audio id="BGM" src="assets/audio/SpearOfJustice.mp3"></audio>
+<audio id="jumpSFX" src="assets/audio/jump.mp3"></audio>
+<audio id="deathSFX" src="assets/audio/fail.mp3"></audio>
+
 <div id="character"></div>
 <div id="obstacle"></div>
 <div id="score">Score: 0</div>
-<button id="start" onclick="startGame()">Start</button>
+<img id="soundIcon" src="assets/img/soundoffblack.png" alt="" onclick=soundIconChange()>
+
+<div id="menuUI">
+    <button id="start" onclick="startGame()">Start</button>
+    <button id="blackTheme" onclick="blackTheme()">Schwarzes Theme</button>
+    <button id="lightTheme" onclick="lightTheme()">Light Theme</button>
+    <button id="pondTheme" onclick="pondTheme()">Teich Theme</button>
+</div>
+
+<img id="gameOverImg" src="assets/img/gameover.png" alt="">
+<button id="restartButton" onclick="restart()">Nochmal spielen</button>
 
 <script>
     let obstacleLeft = 1000;
     let obstacle = document.getElementById("obstacle");
-    let scoreElement = document.getElementById("score");
     let score = 0;
-
+    let bgm = document.getElementById("BGM");
+    let jumpSFX = document.getElementById("jumpSFX");
+    let deathSFX = document.getElementById("deathSFX")
     let character = document.getElementById("character");
-    let startbutton = document.getElementById("start")
     let isJumping = false;
-    let gamestart = false;
     let speedValue = 1;
+    let body = document.getElementById("body");
+    let startButton = document.getElementById("start");
+    let blackThemeButton = document.getElementById("blackTheme");
+    let lightThemeButton = document.getElementById("lightTheme");
+    let pondThemeButton = document.getElementById("pondTheme");
+    let scoreElement = document.getElementById("score");
+    let menuMusic = document.getElementById("menuTheme");
+    let soundIcon = document.getElementById("soundIcon");
+    let uiColor = "black";
+    let theme = "light";
+    let soundOn = false;
+    let gameInterval;
+    let gameOverImg = document.getElementById("gameOverImg");
+    let restartButton = document.getElementById("restartButton");
+    //let uiElements = document.getElementById("menuUI")
 
-    function wait(ms){
-        var start = new Date().getTime();
-        var end = start;
-        while(end < start + ms) {
-            end = new Date().getTime();
+    function checkSoundSettings() {
+        soundOn = soundIcon.src.split("/").pop() === "soundonblack.png" || soundIcon.src.split("/").pop() === "soundonwhite.png";
+    }
+
+    function soundIconChange() {
+        menuMusic.loop = true;
+        if(soundIcon.src.split("/").pop() === "soundoffwhite.png" || soundIcon.src.split("/").pop() === "soundoffblack.png") {
+            soundIcon.src = "assets/img/soundon" + uiColor + ".png";
+            menuMusic.play();
+            soundOn = true;
+        } else if (soundIcon.src.split("/").pop() === "soundonwhite.png" || soundIcon.src.split("/").pop() === "soundonblack.png"){
+            soundIcon.src = "assets/img/soundoff" + uiColor + ".png";
+            menuMusic.pause();
+            menuMusic.currentTime = 0;
+            soundOn = false;
         }
     }
 
+    function soundIconChangeOnThemeSwap(){
+        if (soundOn){
+            soundIcon.src = "assets/img/soundon" + uiColor + ".png";
+        } else {
+            soundIcon.src = "assets/img/soundoff" + uiColor + ".png";
+        }
+    }
+
+    function blackTheme() {
+        body.style.backgroundImage = "";
+        body.style.background = "black";
+        uiColor = "white";
+        scoreElement.style.color = uiColor;
+        theme = "black";
+        soundIconChangeOnThemeSwap();
+    }
+
+    function lightTheme(){
+        body.style.backgroundImage = "";
+        body.style.background = "white";
+        uiColor = "black";
+        scoreElement.style.color = uiColor;
+        theme = "light";
+        soundIconChangeOnThemeSwap();
+    }
+
+    function pondTheme(){
+        body.style.background = "";
+        body.style.backgroundImage = "url(assets/img/background.jpg)";
+        uiColor = "white";
+        scoreElement.style.color = uiColor;
+        theme = "pond";
+        soundIconChangeOnThemeSwap();
+    }
+
     function startGame(){
-        start.style.top = "-1000px";
-        setInterval(id => {
+        menuMusic.pause();
+        checkSoundSettings()
+        if (soundOn) {
+            bgm.loop = true;
+            bgm.play();
+        }
+        startButton.style.top = "-1000px";
+        blackThemeButton.style.top = "-1000px";
+        lightThemeButton.style.top = "-1000px";
+        pondThemeButton.style.top = "-1000px";
+        gameInterval = setInterval(id => {
             obstacle.style.left = obstacleLeft + "px";
             obstacleLeft -= speedValue;
 
@@ -50,10 +134,9 @@
             }
 
             let characterTop = parseInt(character.style.top);
-            if (obstacleLeft < 150 && obstacleLeft > 50 && characterTop >= 500) {
-                alert("Game over\nScore: " + score);
-                clearInterval(id);
-                location.reload();
+
+            if (obstacleLeft < 130 && characterTop >= 500) {
+                gameover();
             }
 
             if (obstacleLeft < 0) {
@@ -66,14 +149,16 @@
     function jump() {
         if (isJumping) return;
         isJumping = true;
-        //nice
         let characterTop = 500;
         let goingUp = true;
+        if (soundOn) {
+            jumpSFX.play()
+        }
 
         let jumpInterval = setInterval(() => {
             if (goingUp) {
                 characterTop -= 20;
-                if (characterTop <= 220) {
+                if (characterTop <= 260) {
                     goingUp = false;
                 }
             } else {
@@ -85,6 +170,33 @@
             }
             character.style.top = characterTop + "px";
         }, 20);
+    }
+
+    function gameover() {
+        clearInterval(gameInterval);
+        bgm.pause();
+        bgm.currentTime = 0;
+        if (soundOn) {
+            deathSFX.play();
+        }
+        gameOverImg.style.top = "50%";
+        restartButton.style.top = "75%";
+    }
+
+    function restart(){
+        if (soundOn) {
+            menuMusic.play();
+        }
+        gameOverImg.style.top = "-1000px";
+        restartButton.style.top = "-1000px";
+        obstacleLeft = 1000;
+        score = 0;
+        speedValue = 1;
+        scoreElement.innerText = "Score: 0";
+        startButton.style.top = "50%";
+        blackThemeButton.style.top = "32%";
+        lightThemeButton.style.top = "32%";
+        pondThemeButton.style.top = "32%";
     }
 
     document.addEventListener("keydown", jump);
