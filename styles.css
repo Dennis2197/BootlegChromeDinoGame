@@ -9,7 +9,7 @@
 }
 #obstacle{
     width: 200px;
-    height: 200px;
+    height: 180px;
     left: 800px;
     top: 500px;
     position: absolute;
@@ -41,8 +41,13 @@
     text-shadow: black;
 }
 #score {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 5%;
+    left: 5%;
     font-family: Arial, sans-serif;
     color: black;
+    font-size: 28px;
 }
 #blackTheme {
     position: absolute;
@@ -123,4 +128,77 @@
     box-shadow: black;
     border: black;
     text-shadow: black;
+}
+#themesLabel {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 16%;
+    left: 50%;
+    transition: top 2s;
+    font-size: 28px;
+}
+#charactersLabel {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 16%;
+    left: 5%;
+    transition: top 2s;
+    font-size: 28px;
+}
+#spongebobCharsButton {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 29%;
+    left: 5%;
+    transition: top 2s;
+    font-size: 15px;
+    width: 140px;
+    height: 60px;
+    border-radius: 50px;
+    background: linear-gradient(yellow, yellowgreen);
+    font-family: Arial, sans-serif;
+}
+#pepeCharsButton {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 5%;
+    transition: top 2s;
+    font-size: 15px;
+    width: 140px;
+    height: 60px;
+    border-radius: 50px;
+    background: linear-gradient(green, lightgreen);
+    font-family: Arial, sans-serif;
+}
+#hardmode {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 49.8%;
+    left: 65.4%;
+    transition: top 2s;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+#hardmodeLabel {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 69%;
+    transition: top 2s;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+#pythonCharsButton {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 51%;
+    left: 5%;
+    transition: top 2s;
+    font-size: 15px;
+    width: 140px;
+    height: 60px;
+    border-radius: 50px;
+    background: linear-gradient(mediumblue, yellow);
+    font-family: Arial, sans-serif;
 }
